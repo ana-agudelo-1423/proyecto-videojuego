@@ -1,0 +1,92 @@
+#include "widget.h"
+#include "ui_widget.h"
+#include <QMessageBox>
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Widget)
+{
+    ui->setupUi(this);
+
+
+    fondo.load("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/fondo.png");
+
+    if (!fondo.isNull()) {
+        QPixmap fondoEscalado = fondo.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        QPalette paleta;
+        paleta.setBrush(QPalette::Window, fondoEscalado);
+        this->setAutoFillBackground(true);
+        this->setPalette(paleta);
+    } else {
+        QMessageBox::critical(this, "Error", "No se pudo cargar la imagen.");
+    }
+    QString estiloBoton = R"(
+    QPushButton {
+        background-color: rgb(255, 172, 60);
+        color: white;
+        border-radius: 12px;
+        padding: 8px;
+        font-weight: bold;
+    }
+
+    QPushButton:hover {
+        background-color: rgb(255, 150, 30);
+    }
+
+    QPushButton:pressed {
+        background-color: rgb(220, 130, 20);
+    }
+
+)";
+
+    this->setStyleSheet(estiloBoton);
+
+}
+
+Widget::~Widget()
+{
+    delete ui;
+}
+
+void Widget::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event); // Siempre llamar primero a la clase base
+
+    if (!fondo.isNull()) {
+        QPixmap fondoEscalado = fondo.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+        QPalette pal;
+        pal.setBrush(QPalette::Window, fondoEscalado);
+        this->setPalette(pal);
+    }
+    QWidget::resizeEvent(event);
+
+    // Obtener tamaño actual
+    int w = this->width();
+    int h = this->height();
+
+    // Reposicionar botones manualmente en proporción
+    ui->Juego->move(w * 0.4, h * 0.55);
+    ui->Informacion->move(w * 0.4, h * 0.68);
+    ui->Salir->move(w * 0.4, h * 0.8);
+}
+
+void Widget::on_Informacion_clicked(){
+
+    QMessageBox msgBox;
+    msgBox.setText("Informacion de niveles.");
+    msgBox.exec();
+}
+
+void Widget::on_Juego_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("The document has been modified.");
+    msgBox.exec();
+}
+
+void Widget::on_Salir_clicked()
+{
+         this->close();
+}
+
