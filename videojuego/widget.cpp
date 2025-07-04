@@ -1,7 +1,9 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "primero.h"
 #include <QMessageBox>
-
+#include <QDialog>
+#include <unistd.h>
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -47,7 +49,18 @@ Widget::~Widget()
 {
     delete ui;
 }
+void Widget::abrirPrimero() {
+    Primero *dialogo = new Primero(this);
+    dialogo->setAttribute(Qt::WA_DeleteOnClose); // Autoeliminación al cerrar
 
+    connect(dialogo, &QDialog::finished, this, [this](int result) {
+        if (result == QDialog::Accepted) {
+            qDebug() << "Juego aceptado";
+        }
+    });
+
+    dialogo->exec();
+}
 void Widget::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event); // Siempre llamar primero a la clase base
@@ -77,12 +90,31 @@ void Widget::on_Informacion_clicked(){
     msgBox.setText("Informacion de niveles.");
     msgBox.exec();
 }
-
 void Widget::on_Juego_clicked()
 {
-    QMessageBox msgBox;
-    msgBox.setText("The document has been modified.");
-    msgBox.exec();
+    qDebug() << "Intentando abrir juego...";
+
+    if (!juego) {
+        qDebug() << "Creando nueva instancia de Primero";
+        juego = new Primero(this);
+
+        // Verificación crítica
+        if (!juego) {
+            qCritical() << "Fallo al crear instancia de Primero";
+            return;
+        }
+    }
+
+    try {
+        qDebug() << "Iniciando juego...";
+        juego->iniciar();
+        juego->show();
+        qDebug() << "Ventana mostrada. Visible?" << juego->isVisible();
+    } catch (const std::exception& e) {
+        qCritical() << "Excepción:" << e.what();
+    } catch (...) {
+        qCritical() << "Excepción desconocida";
+    }
 }
 
 void Widget::on_Salir_clicked()
