@@ -92,10 +92,10 @@ void Widget::on_Informacion_clicked(){
 }
 void Widget::on_Juego_clicked()
 {
-    qDebug() << "Intentando abrir juego...";
+
 
     if (!juego) {
-        qDebug() << "Creando nueva instancia de Primero";
+
         juego = new Primero(this);
 
         // Verificación crítica
@@ -106,15 +106,15 @@ void Widget::on_Juego_clicked()
     }
 
     try {
-        qDebug() << "Iniciando juego...";
+
         juego->iniciar();
         juego->show();
-        qDebug() << "Ventana mostrada. Visible?" << juego->isVisible();
     } catch (const std::exception& e) {
         qCritical() << "Excepción:" << e.what();
     } catch (...) {
         qCritical() << "Excepción desconocida";
     }
+
 }
 
 void Widget::on_Salir_clicked()
