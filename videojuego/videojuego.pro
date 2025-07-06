@@ -10,15 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    objeto.cpp \
     primero.cpp \
+    segundo.cpp \
     widget.cpp
 
 HEADERS += \
+    objeto.h \
     primero.h \
+    segundo.h \
     widget.h
 
 FORMS += \
     primero.ui \
+    segundo.ui \
     widget.ui
 
 # Default rules for deployment.

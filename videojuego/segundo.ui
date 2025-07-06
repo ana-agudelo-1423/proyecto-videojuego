@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>primero</class>
- <widget class="QWidget" name="primero">
+ <class>segundo</class>
+ <widget class="QWidget" name="segundo">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,7 +14,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Primero</string>
+   <string>segundo</string>
   </property>
   <property name="toolTip">
    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -45,63 +45,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <widget class="QLabel" name="gokuLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>100</y>
+     <x>50</x>
+     <y>130</y>
      <width>111</width>
      <height>131</height>
     </rect>
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelKamisama">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>280</y>
-     <width>331</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgba(0, 255, 0, 25);
-border: none;
-color: white;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelEstado">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgba(0, 255, 0, 25);
-border: none;
-color: white;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnSaltar">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>330</y>
-     <width>75</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Saltar </string>
    </property>
   </widget>
  </widget>
