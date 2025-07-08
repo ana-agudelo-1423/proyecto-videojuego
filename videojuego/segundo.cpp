@@ -187,3 +187,16 @@ void segundo::reducirVida(int cantidad) {
         close();  // Cierra la ventana
     }
 }
+
+void segundo::on_btnContinuar_clicked()
+{
+    if (!juego) {
+        juego = new tercero(nullptr);  // Sin padre
+    }
+    juego->show();
+    this->hide();  // Opcional: ocultar Primero
+    juego = new tercero(this);
+    this->hide();  // Oculta Primero
+    juego->show();
+}
+

@@ -13,17 +13,20 @@ SOURCES += \
     objeto.cpp \
     primero.cpp \
     segundo.cpp \
+    tercero.cpp \
     widget.cpp
 
 HEADERS += \
     objeto.h \
     primero.h \
     segundo.h \
+    tercero.h \
     widget.h
 
 FORMS += \
     primero.ui \
     segundo.ui \
+    tercero.ui \
     widget.ui
 
 # Default rules for deployment.

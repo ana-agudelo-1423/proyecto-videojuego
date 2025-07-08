@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QPixmap>
+#include <QLabel>
+#include <QList>
 #include "Segundo.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,15 +18,17 @@ class Primero : public QDialog  // Nombre de la clase principal
     Q_OBJECT
 
 public:
+    void extracted();
     explicit Primero(QWidget *parent = nullptr);
     ~Primero();
-    void iniciar();  // Método para iniciar el juego
+    void iniciar(); // Método para iniciar el juego
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
 private slots:
     void continuarYSalto();      // función combinada
     void actualizarSalto();
+    void detectarColisionConNubes();
     void on_btnContinuar_clicked();
 
 signals:
@@ -39,5 +43,6 @@ private:
     int velocidadX;
     int posicionInicialY;
     bool subiendo;
+    QList<QLabel*> nubes;
 };
 #endif // PRIMERO_H

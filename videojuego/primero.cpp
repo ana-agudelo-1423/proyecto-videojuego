@@ -5,16 +5,23 @@
 #include <QPixmap>
 #include <QRandomGenerator>
 #include <QTimer>
-Primero::Primero(QWidget *parent)
-    : QDialog(parent), ui(new Ui::primero)
-{
-    ui->setupUi(this);  // Solo una vez
+void Primero::extracted() {
+    for (QLabel *nube : nubes) {
+        nube->setPixmap(
+            QPixmap("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug//nube.png")
+                .scaled(140, 70, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        nube->setStyleSheet("background: transparent;");
+    }
+}
+Primero::Primero(QWidget *parent) : QDialog(parent), ui(new Ui::primero) {
+    ui->setupUi(this); // Solo una vez
     timerSalto = new QTimer(this);
-
 
     try {
         // Carga segura de imagen
-        if (!fondoprimero.load("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/fondoprimero.jpeg")) {
+        if (!fondoprimero.load(
+                "C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/"
+                "Desktop_Qt_6_8_2_MinGW_64_bit-Debug/fondoprimero.jpeg")) {
             qWarning() << "No se pudo cargar la imagen. Usando color sólido";
             fondoprimero = QPixmap(size());
             fondoprimero.fill(Qt::darkBlue);
@@ -52,13 +59,24 @@ Primero::Primero(QWidget *parent)
     // Configurar imagen de Goku
     QPixmap gokuImg("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/goku.png");
     if (!gokuImg.isNull()) {
-        ui->gokuLabel->setPixmap(gokuImg.scaled(111, 131, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        ui->gokuLabel->setPixmap(gokuImg.scaled(111, 131, Qt::KeepAspectRatio,
+                                                Qt::SmoothTransformation));
     } else {
         ui->gokuLabel->setText("Goku aquí (imagen no encontrada)");
     }
-
+    nubes.append(ui->nube1);
+    nubes.append(ui->nube2);
+    nubes.append(ui->nube3);
+    // ... agrega todas tus nubes
+    for (QLabel* nube : std::as_const(nubes)) {
+        nube->setPixmap(QPixmap("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/nube.jpg").scaled(100, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        nube->setStyleSheet("background: transparent;");
+    }
+    // Asegúrate de poner sus imágenes
+    extracted();
     // Conectar botón
-    connect(ui->btnSaltar, &QPushButton::clicked, this, &Primero::continuarYSalto);
+    connect(ui->btnSaltar, &QPushButton::clicked, this,
+            &Primero::continuarYSalto);
     timerSalto = new QTimer(this);
     connect(timerSalto, &QTimer::timeout, this, &Primero::actualizarSalto);
 }
@@ -125,7 +143,7 @@ void Primero::actualizarSalto() {
     x += velocidadX;
 
     ui->gokuLabel->move(x, y);
-
+    detectarColisionConNubes();
     if (subiendo) {
         if (velocidadY < 0)
             velocidadY++;
@@ -139,6 +157,22 @@ void Primero::actualizarSalto() {
         }
     }
 }
+void Primero::detectarColisionConNubes() {
+    QRect gokuRect = ui->gokuLabel->geometry();
+
+    for (QLabel* nube : nubes) {
+        QRect nubeRect = nube->geometry();
+
+        if (gokuRect.intersects(nubeRect)) {
+            // Goku aterrizó sobre la nube
+            int nuevaY = nube->y() - ui->gokuLabel->height() + 10;
+            ui->gokuLabel->move(ui->gokuLabel->x(), nuevaY);
+            return;
+        }
+    }
+}
+
+
 void Primero::on_btnContinuar_clicked() {
     if (!juego) {
         juego = new segundo(nullptr);  // Sin padre
@@ -149,4 +183,3 @@ void Primero::on_btnContinuar_clicked() {
     this->hide();  // Oculta Primero
     juego->show();
 }
-
