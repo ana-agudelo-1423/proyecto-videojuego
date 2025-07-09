@@ -30,6 +30,8 @@ private slots:
     void actualizarSalto();
     void detectarColisionConNubes();
     void on_btnContinuar_clicked();
+    void reiniciarNivel();
+    void subirNivel();
 
 signals:
     void juegoTerminado();  // Señal cuando el juego finaliza

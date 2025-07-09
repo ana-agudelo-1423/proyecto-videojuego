@@ -55,7 +55,9 @@ Objeto::Objeto(QWidget *parent, int danio) : QLabel(parent), danio(danio) {
     } else {
         setText("💥");  // Fallback visual
     }
-    move(QRandomGenerator::global()->bounded(300), 0);  // Posición aleatoria en la parte superior
+    int x = QRandomGenerator::global()->bounded(50, 400);   // Posición X aleatoria
+    int y = QRandomGenerator::global()->bounded(300, 400);  // Posición Y aleatoria
+    move(x, y);  // Posición aleatoria en la parte superior
 }
 
 int Objeto::getDanio() const {

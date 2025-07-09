@@ -5,11 +5,12 @@
 #include <QPixmap>
 #include <QRandomGenerator>
 #include <QTimer>
+#include <QMessageBox>
 void Primero::extracted() {
     for (QLabel *nube : nubes) {
         nube->setPixmap(
             QPixmap("C:/Users/Usuario/Documents/proyecto-videojuego/videojuego/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug//nube.png")
-                .scaled(140, 70, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                .scaled(200, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         nube->setStyleSheet("background: transparent;");
     }
 }
@@ -141,7 +142,10 @@ void Primero::actualizarSalto() {
 
     y += velocidadY;
     x += velocidadX;
-
+    if (y > this->height()) {
+        reiniciarNivel();
+        return;
+    }
     ui->gokuLabel->move(x, y);
     detectarColisionConNubes();
     if (subiendo) {
@@ -170,6 +174,18 @@ void Primero::detectarColisionConNubes() {
             return;
         }
     }
+}
+void Primero::reiniciarNivel()
+{
+    QMessageBox::warning(this, "¡Caíste!", "Has fallado el salto. Reiniciando nivel...");
+    ui->gokuLabel->move(50, posicionInicialY);  // vuelve al inicio
+    timerSalto->stop();
+}
+
+void Primero::subirNivel()
+{
+    QMessageBox::information(this, "¡Bien hecho!", "¡Has llegado al siguiente nivel!");
+    on_btnContinuar_clicked();  // Ir a la siguiente ventana
 }
 
 

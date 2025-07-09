@@ -108,9 +108,9 @@ color: white;</string>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
-     <width>171</width>
-     <height>70</height>
+     <y>140</y>
+     <width>200</width>
+     <height>80</height>
     </rect>
    </property>
    <property name="text">
@@ -120,10 +120,10 @@ color: white;</string>
   <widget class="QLabel" name="nube2">
    <property name="geometry">
     <rect>
-     <x>189</x>
-     <y>160</y>
-     <width>151</width>
-     <height>70</height>
+     <x>180</x>
+     <y>140</y>
+     <width>200</width>
+     <height>80</height>
     </rect>
    </property>
    <property name="text">
@@ -133,10 +133,10 @@ color: white;</string>
   <widget class="QLabel" name="nube3">
    <property name="geometry">
     <rect>
-     <x>349</x>
-     <y>170</y>
-     <width>161</width>
-     <height>70</height>
+     <x>350</x>
+     <y>140</y>
+     <width>200</width>
+     <height>80</height>
     </rect>
    </property>
    <property name="text">
