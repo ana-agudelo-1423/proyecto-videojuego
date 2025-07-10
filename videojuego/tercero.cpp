@@ -119,6 +119,7 @@ tercero::tercero(QWidget *parent) :
    vidaPiccolo = new QProgressBar(this);
    vidaPiccolo->setRange(0, 100);
    vidaPiccolo->setValue(100);
+   ui->btnSalir->hide();
 };
 void tercero::resizeEvent(QResizeEvent *event)
 {
@@ -331,6 +332,11 @@ lanzarBolaDeEnergia();
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
     }
+    if (enemigo->getVida() <= 0) {
+
+        nivelCompletado();
+        return;
+    }
 
 }
 void tercero::lanzarBolaDeEnergiaEnemigo()
@@ -349,4 +355,9 @@ void Personaje::recibirDanio(int danio)
     if (danioFinal < 1) danioFinal = 1;  // Siempre al menos 1 daño
     vida -= danioFinal;
     if (vida < 0) vida = 0;
+}
+void tercero::nivelCompletado()
+{
+    QMessageBox::information(this, "¡Nivel completado!", "Has llegado al final.");
+    ui->btnSalir->show();  // ✅ Mostrar el botón ahora
 }

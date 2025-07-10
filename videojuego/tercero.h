@@ -63,6 +63,7 @@ private slots:
     void moverBolas();
     void on_btnSalir_clicked();
     void lanzarBolaDeEnergiaEnemigo();
+    void nivelCompletado();
     void on_btnAtaque_clicked();
 
 

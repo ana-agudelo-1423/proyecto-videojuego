@@ -32,6 +32,7 @@ private slots:
     void on_btnContinuar_clicked();
     void reiniciarNivel();
     void subirNivel();
+    void nivelCompletado();
 
 signals:
     void juegoTerminado();  // Señal cuando el juego finaliza

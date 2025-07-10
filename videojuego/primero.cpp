@@ -80,6 +80,7 @@ Primero::Primero(QWidget *parent) : QDialog(parent), ui(new Ui::primero) {
             &Primero::continuarYSalto);
     timerSalto = new QTimer(this);
     connect(timerSalto, &QTimer::timeout, this, &Primero::actualizarSalto);
+    ui->btnContinuar->hide();
 }
 
 void Primero::resizeEvent(QResizeEvent *event)
@@ -146,6 +147,7 @@ void Primero::actualizarSalto() {
         reiniciarNivel();
         return;
     }
+
     ui->gokuLabel->move(x, y);
     detectarColisionConNubes();
     if (subiendo) {
@@ -158,8 +160,14 @@ void Primero::actualizarSalto() {
         if (y >= posicionInicialY) {
             ui->gokuLabel->move(x, posicionInicialY);
             timerSalto->stop();
+
+            QRect zonaMeta(width() - 100, 50, 80, 100);
+            if (zonaMeta.intersects(ui->gokuLabel->geometry())) {
+                nivelCompletado();
+            }
         }
     }
+
 }
 void Primero::detectarColisionConNubes() {
     QRect gokuRect = ui->gokuLabel->geometry();
@@ -198,4 +206,9 @@ void Primero::on_btnContinuar_clicked() {
     juego = new segundo(this);
     this->hide();  // Oculta Primero
     juego->show();
+}
+void Primero::nivelCompletado()
+{
+    QMessageBox::information(this, "¡Nivel completado!", "Has llegado al final.");
+    ui->btnContinuar->show();  // ✅ Mostrar el botón ahora
 }

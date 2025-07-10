@@ -53,7 +53,7 @@ void Widget::abrirPrimero() {
     Primero *dialogo = new Primero(this);
     dialogo->setAttribute(Qt::WA_DeleteOnClose); // Autoeliminación al cerrar
 
-    connect(dialogo, &QDialog::finished, this, [this](int result) {
+    connect(dialogo, &QDialog::finished, this, [](int result) {
         if (result == QDialog::Accepted) {
             qDebug() << "Juego aceptado";
         }
@@ -87,7 +87,17 @@ void Widget::resizeEvent(QResizeEvent *event)
 void Widget::on_Informacion_clicked(){
 
     QMessageBox msgBox;
-    msgBox.setText("Informacion de niveles.");
+    msgBox.setWindowTitle("Información de niveles");
+
+    QString texto =
+        "Primer nivel:\n"
+        "El primer nivel se basa en saltar unas nubes sin caerse al vacío.\n\n"
+        "Segundo nivel:\n"
+        "En el segundo nivel debes evitar unas rocas porque estas producen daño.\n\n"
+        "Tercer nivel:\n"
+        "En el tercer nivel ocurre la pelea de Goku con Piccolo mediante bolas de energía.";
+
+    msgBox.setText(texto);
     msgBox.exec();
 }
 void Widget::on_Juego_clicked()

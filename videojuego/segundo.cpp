@@ -74,11 +74,11 @@ generarObjetos(5);
     }
     QProgressBar::chunk {
         background-color: #FF0000;  /* Color de la barra de progreso */
-    }
-)");
+    })");
 
     // Mostrar el porcentaje como texto
     barraVida->setFormat("%p%");
+    ui->btnContinuar->hide();
 }
 void segundo::resizeEvent(QResizeEvent *event)
 {
@@ -141,6 +141,10 @@ void segundo::moverGoku(int dx, int dy) {
 
     goku->move(newX, newY);
     verificarColisiones();  // Verifica colisiones después de mover
+    QRect zonaMeta(width() - 100, 50, 80, 100);  // Ajusta según la meta
+    if (zonaMeta.intersects(ui->gokuLabel->geometry())) {
+        nivelCompletado();
+    }
 
 }
 void segundo::keyPressEvent(QKeyEvent *event) {
@@ -200,3 +204,8 @@ void segundo::on_btnContinuar_clicked()
     juego->show();
 }
 
+void segundo::nivelCompletado()
+{
+    QMessageBox::information(this, "¡Nivel completado!", "Has llegado al final.");
+    ui->btnContinuar->show();  // ✅ Mostrar el botón ahora
+}

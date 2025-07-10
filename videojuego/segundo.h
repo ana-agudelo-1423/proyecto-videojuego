@@ -22,6 +22,7 @@ public:
     int iniciar();
    void moverGoku(int dx, int dy);
   void reducirVida(int cantidad);
+   void nivelCompletado();
 private slots:
 
 
