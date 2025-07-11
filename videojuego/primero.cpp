@@ -99,10 +99,12 @@ Primero::~Primero()
 {
     delete ui;
 }
-void Primero::iniciar() {
 
+void Primero::iniciar() {
+    qDebug() << "Juego iniciado!";
     // Lógica de inicio (cargar recursos, resetear puntuación, etc.)
 }
+
 void Primero::continuarYSalto() {
     if (timerSalto->isActive())
         return; // evita saltos múltiples

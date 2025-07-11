@@ -96,9 +96,6 @@ segundo::~segundo()
 {
     delete ui;  // Liberar memoria
 }
-//segundo :: iniciar(){
-//     return 0;
-//}
 
 void segundo::generarObjetos(int cantidad) {
     for (int i = 0; i < cantidad; ++i) {
